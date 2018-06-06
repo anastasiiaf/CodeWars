@@ -144,3 +144,84 @@ print(s)
          
 anag = anagrams('abba', ['aabb', 'bbaa', 'dada'])    
 print(anag)        
+
+
+
+##############################################################################################
+# 8. Tribonacci
+##############################################################################################
+def tribonacci(signature, n):
+    start = len(signature)-1
+
+    if n<len(signature): 
+        output = [signature[i] for i in range(0, n)]
+    else:
+        output = signature
+        for i in range(start, n-start+1):
+           output.append(output[i]+output[i-1]+output[i-2])     
+    return(output)
+
+r = tribonacci([1, 1, 1], 0)
+print(r)
+
+
+
+##############################################################################################
+# 9. Sort the odd
+##############################################################################################
+#You have an array of numbers.
+#Your task is to sort ascending odd numbers but even numbers must be on their places.
+#Zero isn't an odd number and you don't need to move it. If you have an empty array, 
+#you need to return it.
+
+def sort_array(source_array):
+    
+    even_index = [i for i in range(0, len(source_array)) if source_array[i] % 2==0]
+    odd_index = [i for i in range(0, len(source_array)) if source_array[i] % 2!=0]
+    odd = [source_array[i] for i in odd_index]
+    odd.sort()
+    result = []
+    j = 0
+    for i in range(0, len(source_array)):
+        if i in even_index:
+           result.append(source_array[i]) 
+        else:
+           result.append(odd[j]) 
+           j = j+1
+    return(result)       
+            
+    
+r = sort_array([5, 3, 2, 8, 1, 4])   
+print(r)    
+
+
+##############################################################################################
+# 10. Weight of weights
+##############################################################################################
+#It was decided to attribute a "weight" to numbers.
+# The weight of a number will be from now on the sum of its digits.    
+#For example 99 will have "weight" 18, 100 will have "weight" 1 so 
+#in the list 100 will come before 99. Given a string with the weights
+# of FFC members in normal order can you give this string ordered by
+# "weights" of these numbers? 
+
+def order_weight(strng):
+    keys = strng.split()
+    weights = []
+    for l in range(0, len(keys)):
+        elem = sum([int(i) for i in list(str(keys[l]))])
+        weights.append(elem)
+  
+    print(weights)
+    d = list(zip(keys, weights))
+    d = sorted(d, key=lambda x: (x[1], x[0]))  # sort in a tuple: piority 1 column (weights), then 0 column (numbers)
+    
+    return(" ".join([d[i][0] for i in range(0, len(keys))]))
+
+
+
+r = order_weight("2000 10003 1234000 44444444 9999 11 11 22 123")
+print(r)
+    
+    
+    
